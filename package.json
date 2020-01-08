@@ -1,0 +1,29 @@
+{
+  "name": "vue-cli-plugin-cloud-admin",
+  "version": "0.1.0",
+  "description": "vue cli plugin about cloud-admin",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "cd addon && npm run build",
+    "init": "cd addon && npm install",
+    "serve": "cd addon && npm run serve",
+    "build": "cd addon && npm run build",
+    "lint": "cd addon && npm run lint"
+  },
+  "keywords": [
+    "vue",
+    "cli",
+    "plugin",
+    "cloud-admin"
+  ],
+  "author": "zhangsanshi5566@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vusion-templates/vue-cli-plugin-cloud-admin"
+  },
+  "homepage": "https://github.com/vusion-templates/vue-cli-plugin-cloud-admin#readme",
+  "dependencies": {
+    "@vue/cli-shared-utils": "^4.1.2"
+  }
+}
