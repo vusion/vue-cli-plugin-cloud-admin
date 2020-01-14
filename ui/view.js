@@ -1,12 +1,12 @@
 const path = require('path');
 const fs = require('fs');
+const prefix = require('../config').prefix;
 module.exports = function (api) {
-    const root = api.getCwd();
     const getPages = function() {
         const pages = require(api.resolve('pages.json'));
         return pages;
     };
-    const getUI = function () {
+    const getUI = function (root) {
         const uiRoot = path.join(root, 'ui');
         let uiIsNew = true;
         if (fs.existsSync(uiRoot) && fs.existsSync(api.resolve('ui/.version'))) {
@@ -29,18 +29,18 @@ module.exports = function (api) {
     };
     if (process.env.VUE_APP_CLI_UI_DEBUG) {
         api.addClientAddon({
-            id: 'org.vusion.cloud-admin.client-addon',
+            id: `${prefix}.client-addon`,
             url: 'http://localhost:8042/index.js',
         });
     } else {
         api.addClientAddon({
-            id: 'org.vusion.cloud-admin.client-addon',
+            id: `${prefix}.client-addon`,
             path: require('path').join(__dirname, '../addon/dist'),
         });
     }
     api.addView({
-        id: 'org.vusion.cloud-admin.views.index',
-        name: 'org.vusion.cloud-admin.routes.index',
+        id: `${prefix}.views.index`,
+        name: `${prefix}.routes.index`,
         icon: '/_plugin/vue-cli-plugin-cloud-admin/logo.png',
         tooltip: 'Cloud Admin 工作台'
     });
@@ -52,7 +52,7 @@ module.exports = function (api) {
         router: (page) => api.resolve(`src/views/${page}/routes.js`),
         nav: (page) => api.resolve(`src/views/${page}/layout/views/index.vue/index.js`),
     };
-    api.onAction('org.vusion.cloud-admin.open', (params) => {
+    api.onAction(`${prefix}.open`, (params) => {
         let moduleKey = map[params.module];
         if (typeof moduleKey === 'function') {
             moduleKey = moduleKey(params.page);
@@ -65,10 +65,10 @@ module.exports = function (api) {
         }
     });
     api.onViewOpen(({ view, cwd }) => {
-        if (view.id === 'org.vusion.cloud-admin.views.index') {
-            api.setSharedData('org.vusion.cloud-admin.pages', getPages());
-            api.setSharedData('org.vusion.cloud-admin.uiIsNew', getUI());
-            api.setSharedData('org.vusion.cloud-admin.root', root);
+        if (view.id === `${prefix}.views.index`) {
+            api.setSharedData(`${prefix}.pages`, getPages());
+            api.setSharedData(`${prefix}.uiIsNew`, getUI(cwd));
+            api.setSharedData(`${prefix}.root`, cwd);
         }
     });
 };

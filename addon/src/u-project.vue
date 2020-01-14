@@ -9,7 +9,7 @@
       </VueFormField>
       <VueFormField title="全局组件">
         <span>
-          <VueButton class="primary" @click="openComponents()">打开相关文件</VueButton> 修改后，可忽略此选项
+          <VueButton class="primary" @click="openComponents()">查看</VueButton>
         </span>
       </VueFormField>
     </div>
@@ -35,7 +35,9 @@
           </span>
         </template>
         <template v-else>
-          <span>UI 版本和 package.json 一致，无需更新</span>
+          <span>
+            UI 版本和 package.json 一致，无需更新
+          </span>
         </template>
       </VueFormField>
       <VueFormField title="Vue 版本">
@@ -48,10 +50,11 @@
   </div>
 </template>
 <script>
+import config from '../../config.json';
 export default {
   sharedData() {
     return {
-      ...mapSharedData("org.vusion.cloud-admin.", {
+      ...mapSharedData(`${config.prefix}.`, {
         pages: "pages",
         uiIsNew: "uiIsNew",
         root: "root"
@@ -70,7 +73,7 @@ export default {
       this.$router.push(`/tasks/${encodeURIComponent(this.root)}:dll`);
     },
     open(module) {
-      this.$callPluginAction("org.vusion.cloud-admin.open", {
+      this.$callPluginAction(`${config.prefix}.open`, {
         module
       });
     },

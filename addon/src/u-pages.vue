@@ -56,10 +56,11 @@
   </div>
 </template>
 <script>
+import config from '../../config.json';
 export default {
   sharedData() {
     return {
-      ...mapSharedData("org.vusion.cloud-admin.", {
+      ...mapSharedData(`${config.prefix}.`, {
         pages: "pages",
         uiIsNew: "uiIsNew",
         root: "root"
@@ -83,7 +84,7 @@ export default {
   },
   methods: {
     open(module) {
-      this.$callPluginAction("org.vusion.cloud-admin.open", {
+      this.$callPluginAction(`${config.prefix}.open`, {
         module,
         page: this.page
       });
@@ -95,7 +96,7 @@ export default {
       this.open("side");
     },
     openFile(path) {
-      this.$callPluginAction("org.vusion.cloud-admin.open", {
+      this.$callPluginAction(`${config.prefix}.open`, {
         path,
         page: this.page
       });
