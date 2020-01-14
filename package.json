@@ -1,10 +1,10 @@
 {
   "name": "vue-cli-plugin-cloud-admin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "vue cli plugin about cloud-admin",
   "main": "index.js",
   "scripts": {
-    "prepublish": "cd addon && npm run build",
+    "prepublish": "npm run build",
     "init": "cd addon && npm install",
     "serve": "cd addon && npm run serve",
     "build": "cd addon && npm run build",
