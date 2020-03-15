@@ -50,7 +50,7 @@ module.exports = function (api) {
         components: api.resolve('src/global/components/index.js'),
         side: (page) => api.resolve(`src/views/${page}/modules.order.js`),
         router: (page) => api.resolve(`src/views/${page}/routes.js`),
-        nav: (page) => api.resolve(`src/views/${page}/layout/views/index.vue/index.js`),
+        nav: (page) => api.resolve(`src/views/${page}/layout/views/index.vue`),
     };
     api.onAction(`${prefix}.open`, (params) => {
         let moduleKey = map[params.module];
