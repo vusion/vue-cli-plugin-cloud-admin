@@ -45,7 +45,7 @@ module.exports = function (api) {
         tooltip: 'Cloud Admin 工作台'
     });
     const map = {
-        service: api.resolve('src/global/utils/services/index.js'),
+        service: api.resolve('src/global/utils/service/index.js'),
         pageMixin: api.resolve('src/global/mixins/page/page.js'),
         components: api.resolve('src/global/components/index.js'),
         side: (page) => api.resolve(`src/views/${page}/modules.order.js`),
